@@ -29,6 +29,7 @@ RUN /tmp/install.sh
 # Make sure our user owns the directory
 USER root
 RUN  apt-get --purge -y autoremove wget && \
+	cp /tmp/jupyter_notebook_config.py /home/condauser/.jupyter/ && \
 	cp /tmp/ipython_notebook_config.py /home/condauser/.ipython/profile_default/ && \
 	cp /tmp/matplotlib_nb_init.py /home/condauser/.ipython/profile_default/startup && \
 	chown condauser:condauser /home/condauser -R
@@ -49,4 +50,4 @@ ENV SHELL=/bin/bash
 ENV USER=condauser
 WORKDIR /home/condauser/notebooks
 
-CMD $PY3PATH/ipython notebook
+CMD $PY3PATH/jupyter notebook
