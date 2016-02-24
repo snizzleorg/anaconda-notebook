@@ -26,7 +26,7 @@ export PATH=\"$PY3PATH:\$PATH\"" >> $BASH_RC
 $CONDA3 install --yes seaborn
 $CONDA3 install --yes jupyter
 $CONDA3 config --add channels tritemio
-$CONDA3 install fretbursts
+$CONDA3 install --yes fretbursts
 
 # python 2 environment
 #$CONDA3 create --yes -n python2 python=2 pip ipython pyzmq
