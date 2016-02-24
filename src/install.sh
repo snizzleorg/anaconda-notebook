@@ -24,12 +24,15 @@ export PATH=\"$PY3PATH:\$PATH\"" >> $BASH_RC
 
 # additional packages to install
 $CONDA3 install --yes seaborn
+$CONDA3 install --yes jupyter
+$CONDA3 config --add channels tritemio
+$CONDA3 install fretbursts
 
 # python 2 environment
 #$CONDA3 create --yes -n python2 python=2 pip ipython pyzmq
 
 # ipython setup
-$PY3PATH/jupyter --generate-config
+$PY3PATH/jupyter-notebook --generate-config
 #$PY3PATH/ipython profile create default --ipython-dir $HOME/.ipython
 chown condauser:condauser $HOME/.jupyter/ -R
 #chown condauser:condauser $HOME/.ipython/profile_default/security -R

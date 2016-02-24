@@ -14,6 +14,8 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 		build-essential \
 		python-dev \
 		gfortran \
+		libglib2.0-0 \
+		python-qt4 \
 	&& apt-get clean
 
 # Create conda user, get anaconda by web or locally
@@ -23,15 +25,13 @@ RUN /tmp/get_anaconda.sh
 # Run all python installs
 # Perform any cleanup of the install as needed
 USER condauser
-RUN /tmp/install.sh
+RUN /tmp/install.sh 
 
 # Copy notebook config into ipython directory
 # Make sure our user owns the directory
 USER root
 RUN  apt-get --purge -y autoremove wget && \
-	cp /tmp/jupyter_notebook_config.py /home/condauser/.jupyter/ && \
-	cp /tmp/ipython_notebook_config.py /home/condauser/.ipython/profile_default/ && \
-	cp /tmp/matplotlib_nb_init.py /home/condauser/.ipython/profile_default/startup && \
+	cp /tmp/jupyter_notebook_config.py /home/condauser/.jupyter/jupyter_notebook_config.py && \
 	chown condauser:condauser /home/condauser -R
 
 # Set persistent environment variables for python3 and python2
@@ -50,4 +50,4 @@ ENV SHELL=/bin/bash
 ENV USER=condauser
 WORKDIR /home/condauser/notebooks
 
-CMD $PY3PATH/jupyter notebook
+CMD $PY3PATH/jupyter-notebook
